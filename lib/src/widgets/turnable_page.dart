@@ -91,7 +91,7 @@ class TurnablePage extends StatelessWidget {
           width: bookSize.width,
           height: bookSize.height,
         );
-        
+
         return TurnablePageView(
           builder: (context, index) => builder(context, index, constraints),
           bookSize: bookSize,

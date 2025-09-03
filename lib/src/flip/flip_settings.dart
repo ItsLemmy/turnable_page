@@ -96,7 +96,7 @@ class FlipSettings {
     /// Enable mobile scroll support. Default: true
     this.mobileScrollSupport = true,
 
-  // Legacy flags removed
+    // Legacy flags removed
 
     /// Swipe distance threshold in pixels. Default: 100px
     this.swipeDistance = 100.0,
@@ -104,7 +104,7 @@ class FlipSettings {
     /// Show corner highlights on hover. Default: true
     this.showPageCorners = true,
 
-  // Legacy flags removed
+    // Legacy flags removed
 
     /// Corner trigger area size as fraction of diagonal. Default: 0.2 (20%)
     this.cornerTriggerAreaSize = 0.2,
@@ -129,10 +129,10 @@ class FlipSettings {
     double? maxShadowOpacity,
     bool? showCover,
     bool? mobileScrollSupport,
-  // Legacy parameters removed
+    // Legacy parameters removed
     double? swipeDistance,
     bool? showPageCorners,
-  // Legacy parameters removed
+    // Legacy parameters removed
     double? cornerTriggerAreaSize,
     bool? enableEasing,
     bool? enableInertia,
@@ -152,11 +152,12 @@ class FlipSettings {
       maxShadowOpacity: maxShadowOpacity ?? this.maxShadowOpacity,
       showCover: showCover ?? this.showCover,
       mobileScrollSupport: mobileScrollSupport ?? this.mobileScrollSupport,
-  // Legacy fields omitted
+      // Legacy fields omitted
       swipeDistance: swipeDistance ?? this.swipeDistance,
       showPageCorners: showPageCorners ?? this.showPageCorners,
-  // Legacy fields omitted
-      cornerTriggerAreaSize: cornerTriggerAreaSize ?? this.cornerTriggerAreaSize,
+      // Legacy fields omitted
+      cornerTriggerAreaSize:
+          cornerTriggerAreaSize ?? this.cornerTriggerAreaSize,
       enableEasing: enableEasing ?? this.enableEasing,
       enableInertia: enableInertia ?? this.enableInertia,
       inertiaVelocityThreshold:

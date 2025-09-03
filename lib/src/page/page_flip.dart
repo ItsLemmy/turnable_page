@@ -64,8 +64,6 @@ class PageFlip extends EventObject {
     });
   }
 
-
-
   /// Clear all pages
   void clear() {
     pages?.destroy();
@@ -215,8 +213,8 @@ class PageFlip extends EventObject {
     isUserTouch = true;
     isUserMove = false;
     mousePosition = pos;
-  _samples.clear();
-  _recordSample(pos);
+    _samples.clear();
+    _recordSample(pos);
     flipProcess.fold(pos);
   }
 
@@ -227,7 +225,7 @@ class PageFlip extends EventObject {
           _getDistanceBetweenPoints(mousePosition!, pos) > 5) {
         isUserMove = true;
         flipProcess.fold(pos);
-  _recordSample(pos);
+        _recordSample(pos);
       }
     }
   }
@@ -240,7 +238,8 @@ class PageFlip extends EventObject {
       if (!isSwipe) {
         final velocity = _computeVelocity();
         final settings = getSettings;
-        final fastSwipe = settings.enableInertia &&
+        final fastSwipe =
+            settings.enableInertia &&
             velocity.abs() > settings.inertiaVelocityThreshold;
         if (!isUserMove) {
           flipProcess.flip(pos);

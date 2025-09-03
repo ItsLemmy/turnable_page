@@ -55,7 +55,7 @@ class RenderTurnableBook extends RenderBox
   bool _needsIndexRebuild = true;
   SwipeData? _touchPoint;
   double get _swipeDistance => settings.swipeDistance;
-  
+
   // Auto gesture detection properties
   bool _isDragging = false;
   model.Point? _initialTouchPoint;
@@ -731,44 +731,54 @@ class RenderTurnableBook extends RenderBox
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
     // Reset child consumed hit state for each new hit test
     _childConsumedHit = false;
-    
+
     final rect = getRect();
-    
+
     // Test visible static pages for interactive widgets
     if (_orientation != BookOrientation.portrait && leftPage != null) {
       final leftChild = _childByIndex((leftPage as BookPageImpl).index);
-      if (leftChild != null && !_isWhitePageIndex((leftPage as BookPageImpl).index)) {
+      if (leftChild != null &&
+          !_isWhitePageIndex((leftPage as BookPageImpl).index)) {
         final leftOffset = Offset(rect.left, rect.top);
         final adjustedPosition = position - leftOffset;
-        if (_isPositionInChildBounds(adjustedPosition, rect.pageWidth, rect.height) &&
+        if (_isPositionInChildBounds(
+              adjustedPosition,
+              rect.pageWidth,
+              rect.height,
+            ) &&
             leftChild.hitTest(result, position: adjustedPosition)) {
           _childConsumedHit = true;
           return true;
         }
       }
     }
-    
+
     if (rightPage != null) {
       final rightChild = _childByIndex((rightPage as BookPageImpl).index);
-      if (rightChild != null && !_isWhitePageIndex((rightPage as BookPageImpl).index)) {
+      if (rightChild != null &&
+          !_isWhitePageIndex((rightPage as BookPageImpl).index)) {
         final rightOffset = Offset(rect.left + rect.pageWidth, rect.top);
         final adjustedPosition = position - rightOffset;
-        if (_isPositionInChildBounds(adjustedPosition, rect.pageWidth, rect.height) &&
+        if (_isPositionInChildBounds(
+              adjustedPosition,
+              rect.pageWidth,
+              rect.height,
+            ) &&
             rightChild.hitTest(result, position: adjustedPosition)) {
           _childConsumedHit = true;
           return true;
         }
       }
     }
-    
+
     return false;
   }
 
   bool _isPositionInChildBounds(Offset position, double width, double height) {
-    return position.dx >= 0 && 
-           position.dx < width && 
-           position.dy >= 0 && 
-           position.dy < height;
+    return position.dx >= 0 &&
+        position.dx < width &&
+        position.dy >= 0 &&
+        position.dy < height;
   }
 
   @override
@@ -790,16 +800,16 @@ class RenderTurnableBook extends RenderBox
 
   void _handlePointerDown(Offset position) {
     final point = model.Point(position.dx, position.dy);
-    
+
     // Reset only dragging state, keep _childConsumedHit as set by hitTestChildren
     _isDragging = false;
     _initialTouchPoint = point;
-    
+
     _touchPoint = SwipeData(
       point: point,
       time: DateTime.now().millisecondsSinceEpoch,
     );
-    
+
     // If a child widget consumed the hit and this is just a tap, don't start page flip immediately
     // We'll check again during movement or up event
     if (!_childConsumedHit) {
@@ -811,27 +821,27 @@ class RenderTurnableBook extends RenderBox
 
   void _handlePointerMove(Offset position) {
     final point = model.Point(position.dx, position.dy);
-    
+
     if (_initialTouchPoint != null) {
       final deltaX = (point.x - _initialTouchPoint!.x).abs();
       final deltaY = (point.y - _initialTouchPoint!.y).abs();
-      
+
       // Check if user is dragging (moved more than threshold)
       if (deltaX > _minMoveThreshold || deltaY > _minMoveThreshold) {
         if (!_isDragging) {
           _isDragging = true;
-          
+
           // If we didn't start pageFlip before because of child hit, start it now for dragging
           if (_childConsumedHit) {
             pageFlip.startUserTouch(_initialTouchPoint!);
           }
         }
-        
+
         // Ensure animation continues during dragging
         ensureAnimating();
       }
     }
-    
+
     // Process move if we're dragging or no child consumed the initial hit
     if (_isDragging || !_childConsumedHit) {
       if (settings.mobileScrollSupport && _touchPoint != null) {
@@ -843,7 +853,7 @@ class RenderTurnableBook extends RenderBox
       } else {
         pageFlip.userMove(point, true);
       }
-      
+
       // Mark for repaint during interaction
       markNeedsPaint();
     }
@@ -851,15 +861,15 @@ class RenderTurnableBook extends RenderBox
 
   void _handlePointerUp(Offset position) {
     final point = model.Point(position.dx, position.dy);
-    
+
     // If child consumed the hit and user didn't drag, let the child handle it
     if (_childConsumedHit && !_isDragging) {
       _resetGestureState();
       return;
     }
-    
+
     // Process page flip gesture
-  if (_touchPoint != null && _isValidSwipe(point)) {
+    if (_touchPoint != null && _isValidSwipe(point)) {
       _processSwipeGesture(point);
       _touchPoint = null;
     } else {
@@ -871,7 +881,7 @@ class RenderTurnableBook extends RenderBox
         ensureAnimating();
       }
     }
-    
+
     _resetGestureState();
   }
 

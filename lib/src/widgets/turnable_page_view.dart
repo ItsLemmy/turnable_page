@@ -28,7 +28,8 @@ class TurnablePageView extends StatefulWidget {
     required this.aspectRatio,
     required this.bookSize,
     required this.settings,
-    required this.paperBoundaryDecoration,  this.pagesBoundaryIsEnabled = true,
+    required this.paperBoundaryDecoration,
+    this.pagesBoundaryIsEnabled = true,
   });
 
   @override

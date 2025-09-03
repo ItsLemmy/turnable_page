@@ -50,7 +50,7 @@ class FlipProcess {
   ///
   /// @param globalPos - Touch Point Coordinates (relative window)
   void flip(Point globalPos) {
-  // Allow tap-based flips from both top and bottom regions (previous corner restriction removed)
+    // Allow tap-based flips from both top and bottom regions (previous corner restriction removed)
 
     // the flipping process is already running
     if (calc != null) render.finishAnimation();
@@ -154,7 +154,8 @@ class FlipProcess {
       flippingPage?.setPosition(calc!.getActiveCorner());
       flippingPage?.setAngle(calc!.getAngle());
 
-      if (state == FlippingState.userFold || state == FlippingState.foldCorner) {
+      if (state == FlippingState.userFold ||
+          state == FlippingState.foldCorner) {
         final normalizedProgress = progress / 100.0;
         final bendMultiplier = settings.bendStrength;
 
@@ -371,11 +372,15 @@ class FlipProcess {
         if (flippingPage != null && calc != null) {
           final prog = calc!.getFlippingProgress();
           final bend = settings.bendStrength;
-          final eased = settings.enableEasing ? _easeOutCubic(prog / 100) : prog / 100;
+          final eased = settings.enableEasing
+              ? _easeOutCubic(prog / 100)
+              : prog / 100;
           final targetHard = 90 * (1 - eased * bend);
 
           flippingPage!.setHardAngle(
-            calc!.getDirection() == FlipDirection.forward ? targetHard : -targetHard,
+            calc!.getDirection() == FlipDirection.forward
+                ? targetHard
+                : -targetHard,
           );
         }
       });
@@ -484,7 +489,8 @@ class FlipProcess {
     final settings = app.getSettings;
 
     final operatingDistance = settings.cornerTriggerAreaSize > 0
-        ? math.sqrt(math.pow(pageWidth, 2) + math.pow(rect.height, 2)) * settings.cornerTriggerAreaSize
+        ? math.sqrt(math.pow(pageWidth, 2) + math.pow(rect.height, 2)) *
+              settings.cornerTriggerAreaSize
         : math.sqrt(math.pow(pageWidth, 2) + math.pow(rect.height, 2)) / 5;
 
     final bookPos = render.convertToBook(globalPos);

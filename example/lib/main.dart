@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class AnimationTestPage extends StatefulWidget {
   @override
   _AnimationTestPageState createState() => _AnimationTestPageState();
@@ -161,6 +162,28 @@ class _AnimationTestPageState extends State<AnimationTestPage> {
             return _buildTestPage(pageIndex, constraints);
           },
         ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: 'prev',
+            onPressed: () {
+              int prevPage =
+                  (_currentPageNotifier.value - 1 + _pageCount) % _pageCount;
+              _controller.goToPage(prevPage);
+            },
+            child: Icon(Icons.chevron_left),
+          ),
+          SizedBox(width: 16),
+          FloatingActionButton(
+            onPressed: () {
+              int nextPage = (_currentPageNotifier.value + 1) % _pageCount;
+              _controller.goToPage(nextPage);
+            },
+            child: Icon(Icons.navigate_next),
+          ),
+        ],
       ),
     );
   }

@@ -47,7 +47,7 @@ class PDFView extends StatelessWidget {
               // aspectRatio: 5/10,
               pagesBoundaryIsEnabled: false,
               paperBoundaryDecoration: PaperBoundaryDecoration.modern,
-            settings: FlipSettings(),
+              settings: FlipSettings(),
             ),
             _buildBookmark(context),
           ],
