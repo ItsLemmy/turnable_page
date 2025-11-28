@@ -95,6 +95,13 @@ class FlipProcess {
         ? FlipCorner.bottom
         : FlipCorner.top;
 
+    // Check if forward flip is allowed
+    if (direction == FlipDirection.forward &&
+        app.canFlipForward != null &&
+        !app.canFlipForward!()) {
+      return false;
+    }
+
     if (!checkDirection(direction)) return false;
 
     try {

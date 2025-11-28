@@ -80,4 +80,9 @@ class PageFlipController {
   /// Use this only when you need direct access to PageFlip methods
   /// not exposed through this controller
   PageFlip? get pageFlipInstance => _pageFlip;
+
+  /// Set a callback to validate if forward page turn is allowed
+  set canFlipForward(bool Function()? callback) {
+    _pageFlip.canFlipForward = callback;
+  }
 }

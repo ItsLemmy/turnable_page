@@ -28,6 +28,9 @@ class PageFlip extends EventObject {
 
   PageCollection? pages;
 
+  /// Callback to validate if forward page turn is allowed
+  bool Function()? canFlipForward;
+
   /// Create a new PageFlip instance with FlipSetting object
   ///  FlipSetting [setting] - Configuration object
   PageFlip(this.setting, {RenderPage? customRender}) : super() {
