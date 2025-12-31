@@ -85,4 +85,9 @@ class PageFlipController {
   set canFlipForward(bool Function()? callback) {
     _pageFlip.canFlipForward = callback;
   }
+
+  /// Set a callback to validate if backward page turn is allowed
+  set canFlipBackward(bool Function()? callback) {
+    _pageFlip.canFlipBackward = callback;
+  }
 }

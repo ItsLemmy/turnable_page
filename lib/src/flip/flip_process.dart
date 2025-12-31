@@ -102,6 +102,13 @@ class FlipProcess {
       return false;
     }
 
+    // Check if backward flip is allowed
+    if (direction == FlipDirection.back &&
+        app.canFlipBackward != null &&
+        !app.canFlipBackward!()) {
+      return false;
+    }
+
     if (!checkDirection(direction)) return false;
 
     try {

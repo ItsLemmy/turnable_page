@@ -31,6 +31,9 @@ class PageFlip extends EventObject {
   /// Callback to validate if forward page turn is allowed
   bool Function()? canFlipForward;
 
+  /// Callback to validate if backward page turn is allowed
+  bool Function()? canFlipBackward;
+
   /// Create a new PageFlip instance with FlipSetting object
   ///  FlipSetting [setting] - Configuration object
   PageFlip(this.setting, {RenderPage? customRender}) : super() {
